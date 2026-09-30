@@ -1,0 +1,188 @@
+/* =========================================================
+   WATER THEME  —  "From a Droplet to Hard Work"
+   Loads AFTER style.css + professional.css.
+   To go back: remove the water.css <link> and water.js <script>.
+========================================================= */
+
+:root {
+    --bg: #031526;
+    --card: #06243d;
+    --purple: #0ea5e9;
+    --purple-light: #7dd3fc;
+    --cyan: #22d3ee;
+    --cyan-light: #a5f3fc;
+    --aqua: #2dd4bf;
+    --foam: #e6fbff;
+    --text: #eaf8ff;
+    --muted: #9cc3d9;
+    --line: rgba(125, 211, 252, 0.20);
+}
+
+/* ---------- Page: deep water background (canvas draws on top of this) ---------- */
+body {
+    color: var(--text);
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(900px 520px at 15% -5%, rgba(34, 211, 238, 0.16), transparent 65%),
+        radial-gradient(800px 520px at 100% 30%, rgba(14, 165, 233, 0.12), transparent 65%),
+        linear-gradient(180deg, #031526 0%, #04203a 55%, #053454 100%);
+    background-attachment: fixed;
+}
+body::before { display: none; }          /* remove old dotted texture */
+::selection { background: rgba(34, 211, 238, 0.4); color: #fff; }
+
+/* The animated canvas (rain, ripples, bubbles, rising water) */
+#water-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+/* keep all content above the canvas */
+.navbar { z-index: 1000; }
+section, footer, .hero { position: relative; z-index: 1; }
+
+/* ---------- Navbar ---------- */
+.navbar {
+    background: rgba(3, 21, 38, 0.72);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(16px) saturate(150%);
+}
+.logo { color: #fff; }
+.logo span { color: var(--cyan); }
+.nav-links a { color: #a9d4ea; }
+.nav-links a:hover, .nav-links a.active { color: #fff; }
+.nav-links a::after { background: linear-gradient(90deg, #22d3ee, #2dd4bf); }
+
+/* ---------- Hero ---------- */
+.hero-greeting { color: var(--cyan-light); }
+.hero h1 {
+    background: linear-gradient(120deg, #ffffff 10%, #a5f3fc 55%, #5eead4 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+.hero h2, .typing-cursor { color: var(--cyan); }
+.hero-description { color: var(--muted); }
+.hero-code {
+    background: linear-gradient(180deg, rgba(6, 36, 61, 0.78), rgba(4, 26, 46, 0.78)) !important;
+    border: 1px solid rgba(165, 243, 252, 0.28) !important;
+    backdrop-filter: blur(10px);
+    box-shadow:
+        0 30px 60px -22px rgba(0, 0, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+}
+.primary-btn {
+    background: linear-gradient(135deg, #0ea5e9, #2dd4bf) !important;
+    color: #022033 !important;
+    box-shadow: 0 10px 26px -8px rgba(34, 211, 238, 0.65) !important;
+}
+.secondary-btn, .linkedin-btn {
+    background: rgba(255, 255, 255, 0.06) !important;
+    border: 1px solid rgba(165, 243, 252, 0.35) !important;
+    backdrop-filter: blur(8px);
+}
+.secondary-btn:hover, .linkedin-btn:hover {
+    border-color: var(--cyan) !important;
+    background: rgba(34, 211, 238, 0.14) !important;
+}
+
+/* ---------- Section titles ---------- */
+.section-title span {
+    color: #022033;
+    background: linear-gradient(135deg, #a5f3fc, #5eead4);
+    border: none;
+    font-weight: 700;
+}
+.section-title.certification-main-title span,
+#certifications .section-title.certification-main-title > span,
+.section.mybharat-pro-section .section-title span {
+    color: #022033 !important;
+    background: linear-gradient(135deg, #a5f3fc, #5eead4) !important;
+    border: none !important;
+}
+.section-title h2 { color: #fff; }
+
+/* ---------- Cards = glass bubbles ---------- */
+.about-box, .career-objective, .skill-card, .timeline-card, .project-card,
+.education-card, .contact-card, .achievement-card, .mybharat-trigger-card {
+    background:
+        radial-gradient(120% 90% at 10% 0%, rgba(165, 243, 252, 0.10), transparent 55%),
+        linear-gradient(180deg, rgba(6, 36, 61, 0.72), rgba(4, 26, 46, 0.78)) !important;
+    border: 1px solid rgba(165, 243, 252, 0.22) !important;
+    border-radius: 18px;
+    backdrop-filter: blur(10px) saturate(130%);
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
+    box-shadow:
+        0 14px 34px -18px rgba(0, 0, 0, 0.7),
+        inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+.skill-card:hover, .timeline-card:hover, .project-card:hover,
+.education-card:hover, .contact-card:hover, .achievement-card:hover {
+    border-color: rgba(34, 211, 238, 0.65) !important;
+    box-shadow:
+        0 22px 44px -20px rgba(34, 211, 238, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.project-card.current-project { border-color: rgba(94, 234, 212, 0.6) !important; }
+
+/* tags / chips */
+.interest-list span, .project-tags span {
+    background: rgba(34, 211, 238, 0.10);
+    border: 1px solid rgba(165, 243, 252, 0.30);
+    color: #c9f3ff;
+}
+.timeline-dot { background: var(--cyan); box-shadow: 0 0 0 5px rgba(34, 211, 238, 0.18); }
+.timeline::before, .timeline-line { background: linear-gradient(180deg, #22d3ee, #2dd4bf) !important; }
+
+/* ---------- Footer / scrollbar ---------- */
+footer {
+    border-top: 1px solid var(--line);
+    background: rgba(2, 16, 30, 0.45);
+    backdrop-filter: blur(8px);
+    color: #bfe6f7;
+}
+::-webkit-scrollbar-track { background: #031526; }
+::-webkit-scrollbar-thumb { background: linear-gradient(#0ea5e9, #2dd4bf); border-radius: 10px; }
+
+/* ---------- Story indicator: Droplet -> Stream -> River -> Ocean ---------- */
+#water-story {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 900;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px 9px 10px;
+    border-radius: 999px;
+    font: 600 13px/1 "Inter", "Segoe UI", Arial, sans-serif;
+    color: #e6fbff;
+    background: rgba(3, 21, 38, 0.72);
+    border: 1px solid rgba(165, 243, 252, 0.35);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.7);
+    pointer-events: none;
+}
+#water-story .ring {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: conic-gradient(#22d3ee calc(var(--p, 0) * 1%), rgba(255,255,255,.12) 0);
+    display: grid; place-items: center;
+}
+#water-story .ring::after {
+    content: "💧";
+    width: 20px; height: 20px; border-radius: 50%;
+    background: #06243d;
+    display: grid; place-items: center;
+    font-size: 11px;
+}
+@media (max-width: 640px) {
+    #water-story { right: 10px; bottom: 10px; font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #water-canvas { display: none; }
+}

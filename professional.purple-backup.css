@@ -1,0 +1,164 @@
+/* =========================================================
+   PROFESSIONAL THEME  (loads after style.css, overrides it)
+   To go back to the old look: remove the professional.css
+   <link> line from index.html.
+========================================================= */
+
+:root {
+    --bg: #0b1120;
+    --card: #111a2e;
+    --purple: #6366f1;
+    --purple-light: #a5b4fc;
+    --cyan: #38bdf8;
+    --cyan-light: #7dd3fc;
+    --text: #f1f5f9;
+    --muted: #9aa8c2;
+    --line: rgba(148, 163, 184, 0.16);
+}
+
+html { scroll-padding-top: 80px; }
+
+/* ---------- Page background ---------- */
+body {
+    font-family: "Inter", "Segoe UI", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(900px 500px at 12% -5%, rgba(99, 102, 241, 0.18), transparent 65%),
+        radial-gradient(800px 500px at 100% 25%, rgba(56, 189, 248, 0.10), transparent 65%),
+        radial-gradient(900px 600px at 0% 75%, rgba(99, 102, 241, 0.10), transparent 65%);
+    background-attachment: fixed;
+}
+
+/* faint dotted texture that fades downward */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(148, 163, 184, 0.13) 1px, transparent 1px);
+    background-size: 28px 28px;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.2));
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,.9), rgba(0,0,0,.2));
+}
+
+::selection { background: rgba(99, 102, 241, 0.45); color: #fff; }
+
+/* remove neon glows everywhere -> clean look */
+* { text-shadow: none !important; }
+.logo, .hero h1, .section-title h2, .section-title span { filter: none !important; }
+
+/* ---------- Navbar ---------- */
+.navbar {
+    background: rgba(11, 17, 32, 0.82);
+    border-bottom: 1px solid var(--line);
+    box-shadow: none;
+    backdrop-filter: blur(14px) saturate(140%);
+}
+.nav-links a { color: #a9b6cc; font-weight: 500; position: relative; padding: 6px 0; }
+.nav-links a:hover, .nav-links a.active { color: #fff; }
+.nav-links a::after {
+    content: "";
+    position: absolute; left: 0; bottom: -2px;
+    height: 2px; width: 0; border-radius: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    transition: width 0.3s;
+}
+.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+/* ---------- Hero ---------- */
+.hero-glow { display: none; }              /* removes the hard-edged glow blobs */
+.hero-grid {
+    opacity: 0.3;
+    -webkit-mask-image: linear-gradient(to bottom, #000 25%, transparent 95%);
+    mask-image: linear-gradient(to bottom, #000 25%, transparent 95%);
+}
+.hero-greeting { color: var(--cyan-light); letter-spacing: 0.3px; }
+.hero-description { color: var(--muted); }
+.hero-code {
+    background: linear-gradient(180deg, #0f1729, #0c1322) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 16px;
+    box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.65) !important;
+}
+.hero-btn {
+    border-radius: 10px;
+    font-weight: 600;
+    transition: transform 0.25s, box-shadow 0.25s, background 0.25s, border-color 0.25s;
+}
+.hero-btn:hover { transform: translateY(-2px); }
+.primary-btn {
+    background: linear-gradient(135deg, #6366f1, #38bdf8) !important;
+    box-shadow: 0 10px 24px -8px rgba(99, 102, 241, 0.6) !important;
+}
+
+/* ---------- Section titles ---------- */
+.section-title span {
+    color: var(--cyan-light);
+    background: rgba(56, 189, 248, 0.10);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 8px;
+    padding: 2px 9px;
+    font-size: 0.8em;
+}
+.section-title h2 { letter-spacing: -0.5px; }
+
+/* ---------- Cards (one consistent style) ---------- */
+.about-box, .career-objective, .skill-card, .timeline-card, .project-card,
+.education-card, .contact-card, .achievement-card, .mybharat-trigger-card {
+    background: linear-gradient(180deg, rgba(20, 30, 52, 0.85), rgba(14, 22, 40, 0.85)) !important;
+    border: 1px solid var(--line) !important;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px -18px rgba(0, 0, 0, 0.7);
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.skill-card:hover, .timeline-card:hover, .project-card:hover,
+.education-card:hover, .contact-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(129, 140, 248, 0.5) !important;
+    box-shadow: 0 20px 40px -20px rgba(99, 102, 241, 0.45);
+}
+.project-card.current-project { border-color: rgba(56, 189, 248, 0.45) !important; }
+.project-number { color: rgba(148, 163, 184, 0.14); }
+
+/* tags / chips */
+.interest-list span, .project-tags span {
+    background: rgba(99, 102, 241, 0.10);
+    border: 1px solid rgba(129, 140, 248, 0.25);
+    color: #c7d2fe;
+    border-radius: 999px;
+}
+
+/* timeline */
+.timeline-dot { background: var(--cyan); box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.15); }
+
+/* ---------- Footer / scrollbar ---------- */
+footer { border-top: 1px solid var(--line); }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #2a3654; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #3b4a70; }
+
+/* ---------- Consistency fixes ---------- */
+.section-title.certification-main-title span {
+    color: var(--cyan-light) !important;
+    background: rgba(56, 189, 248, 0.10) !important;
+    border: 1px solid rgba(56, 189, 248, 0.25) !important;
+    border-radius: 8px;
+    padding: 2px 9px !important;
+    font-size: 0.8em !important;
+}
+.section-title.certification-main-title h2 { font-size: clamp(30px, 4vw, 40px) !important; }
+.hero { background: none !important; }
+.hero::before, .hero::after { display: none !important; }
+#certifications .section-title.certification-main-title > span,
+.section.mybharat-pro-section .section-title span {
+    color: var(--cyan-light) !important;
+    background: rgba(56, 189, 248, 0.10) !important;
+    border: 1px solid rgba(56, 189, 248, 0.25) !important;
+    border-radius: 8px !important;
+    padding: 2px 9px !important;
+    font-size: 0.8em !important;
+}
+#certifications .section-title.certification-main-title > h2 { font-size: clamp(30px, 4vw, 40px) !important; }
